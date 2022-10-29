@@ -4,5 +4,7 @@ export type DOMMessage = {
 
 export type DOMMessageResponse = {
     title: string;
-    headlines: string[];
+    metaContent: string;
+    description: string;
+    poster: string;
 }

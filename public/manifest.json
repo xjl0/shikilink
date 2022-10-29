@@ -14,7 +14,9 @@
     }
   ],
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "webNavigation",
+    "tabs"
   ],
   "icons": {
     "16": "logo192.png",
