@@ -4,6 +4,7 @@ import {DOMMessage, DOMMessageResponse} from './types';
 import imgLoading from './images/loading.webp';
 import {
     MDBBtn,
+    MDBBtnGroup,
     MDBCard,
     MDBCardBody,
     MDBCardImage,
@@ -87,11 +88,18 @@ function App() {
                                 <MDBCardText>
                                     {description.replace(/(<([^>]+)>)/gi, "").slice(0, 200)}...
                                 </MDBCardText>
-                                <MDBBtn
-                                    title={"Перейти на сайт Smotret Anime 'Anime365'"}
-                                    onClick={() => onClickLocation("https://smotret-anime.com/catalog/search?q=" + encodeURI(metaContent))}>
-                                    Смотреть
-                                </MDBBtn>
+                                <MDBBtnGroup aria-label='Basic example'>
+                                    <MDBBtn
+                                        title={"Перейти на сайт Smotret Anime 'Anime365'"}
+                                        onClick={() => onClickLocation("https://smotret-anime.com/catalog/search?q=" + encodeURI(metaContent))}>
+                                        Anime365
+                                    </MDBBtn>
+                                    <MDBBtn
+                                        title={"Перейти на сайт AnimeGO"}
+                                        onClick={() => onClickLocation("https://animego.org/search/anime?q=" + encodeURI(metaContent))}>
+                                        AnimeGO
+                                    </MDBBtn>
+                                </MDBBtnGroup>
                             </MDBCardBody>
                         </MDBCol>
                     </MDBRow>
