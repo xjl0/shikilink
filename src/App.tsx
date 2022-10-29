@@ -48,7 +48,7 @@ function App() {
                 <MDBCard aria-hidden='true' style={{maxWidth: '48rem'}}>
                     <MDBRow className='g-0'>
                         <MDBCol md='4'>
-                            <MDBCardImage src={imgLoading} alt='...' fluid/>
+                            <MDBCardImage src={imgLoading} alt='loading' fluid/>
                         </MDBCol>
                         <MDBCol md='8'>
                             <MDBCardBody>
