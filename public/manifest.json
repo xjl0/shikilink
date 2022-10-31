@@ -9,7 +9,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://shikimori.one/animes/*", "*://shikimori.org/animes/*"],
+      "matches": ["*://shikimori.one/*", "*://shikimori.org/*"],
       "js": ["./static/js/content.js"]
     }
   ],

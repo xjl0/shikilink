@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {DOMMessage, DOMMessageResponse} from './types';
+import {ChromeMessage, DOMMessage, DOMMessageResponse, Sender} from './types';
 import imgLoading from './images/loading.webp';
 import {
     MDBBtn,
@@ -16,29 +16,29 @@ import {
 } from 'mdb-react-ui-kit';
 
 function App() {
-    const [title, setTitle] = React.useState<string>('');
+    const [titleContent, setTitleContent] = React.useState<string>("");
     const [metaContent, setMetaContent] = React.useState<string>("");
     const [description, setDescription] = React.useState<string>("");
     const [poster, setPoster] = React.useState<string>("");
     const [loading, setLoading] = React.useState<boolean>(false);
 
     React.useEffect(() => {
-        chrome.tabs && chrome.tabs.query({
-            active: true,
-            currentWindow: true
-        }, tabs => {
-            chrome.tabs.sendMessage(
-                tabs[0].id || 0,
-                {type: 'GET_DOM'} as DOMMessage,
-                (response: DOMMessageResponse) => {
-                    setTitle(response.title);
-                    setMetaContent(response.metaContent);
-                    setDescription(response.description);
-                    setPoster(response.poster);
+        const msg: ChromeMessage = {
+            from: Sender.React,
+            message: {type: 'GET_DOM'} as DOMMessage,
+        }
+        chrome.tabs && chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+            chrome.tabs.sendMessage(tabs[0].id || 0, msg, (response: DOMMessageResponse) => {
+                if (response) {
+                    setTitleContent(response.title || "");
+                    setMetaContent(response.metaContent || "");
+                    setDescription(response.description || "");
+                    setPoster(response.poster || imgLoading);
                     setLoading(true);
-                });
+                }
+            });
         });
-    });
+    }, []);
 
     const onClickLocation = (url: string | URL | undefined) => {
         window.open(url, '_blank', 'noopener,noreferrer');
@@ -84,11 +84,11 @@ function App() {
                         </MDBCol>
                         <MDBCol md='8'>
                             <MDBCardBody>
-                                <MDBCardTitle>{title}</MDBCardTitle>
+                                <MDBCardTitle style={{width: '33rem'}}>{titleContent}</MDBCardTitle>
                                 <MDBCardText>
                                     {description.replace(/(<([^>]+)>)/gi, "").slice(0, 200)}...
                                 </MDBCardText>
-                                <MDBBtnGroup aria-label='Basic example'>
+                                {metaContent && <MDBBtnGroup aria-label='Basic example'>
                                     <MDBBtn
                                         title={"Перейти на сайт Smotret Anime 'Anime365'"}
                                         onClick={() => onClickLocation("https://smotret-anime.com/catalog/search?q=" + encodeURI(metaContent))}>
@@ -99,7 +99,7 @@ function App() {
                                         onClick={() => onClickLocation("https://animego.org/search/anime?q=" + encodeURI(metaContent))}>
                                         AnimeGO
                                     </MDBBtn>
-                                </MDBBtnGroup>
+                                </MDBBtnGroup>}
                             </MDBCardBody>
                         </MDBCol>
                     </MDBRow>

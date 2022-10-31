@@ -8,3 +8,13 @@ export type DOMMessageResponse = {
     description: string;
     poster: string;
 }
+
+export enum Sender {
+    React,
+    Content
+}
+
+export interface ChromeMessage {
+    from: Sender,
+    message: any
+}
