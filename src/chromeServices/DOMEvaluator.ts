@@ -3,11 +3,15 @@ import {ChromeMessage, DOMMessageResponse, Sender} from '../types';
 type MessageResponse = (response?: any) => void
 
 const validateSender = (message: ChromeMessage, sender: chrome.runtime.MessageSender) => {
-    return sender.id === chrome.runtime.id && message.from === Sender.React;
+    return sender.id === chrome.runtime.id;
+}
+
+const isPossibleLink = (): boolean => {
+    return window.location.href.indexOf("/animes/") === -1 || document.getElementsByClassName("c-info-right").length === 0;
 }
 
 const messagesFromReactAppListener = (message: ChromeMessage, sender: chrome.runtime.MessageSender, response: MessageResponse) => {
-    if (window.location.href.indexOf("/animes/") === -1 || document.getElementsByClassName("c-info-right").length === 0) {
+    if (isPossibleLink()) {
         const res: DOMMessageResponse = {
             title: "Не найдено аниме",
             metaContent: "",
@@ -16,8 +20,8 @@ const messagesFromReactAppListener = (message: ChromeMessage, sender: chrome.run
         };
         response(res)
     }
-    const isValidated = validateSender(message, sender);
-    if (isValidated) {
+    const isValidDate = validateSender(message, sender)
+    if (isValidDate && message.from === Sender.React) {
         const res: DOMMessageResponse = {
             title: document.title,
             metaContent: document.querySelector("meta[itemprop=headline]")!.getAttribute('content')!,
@@ -26,6 +30,16 @@ const messagesFromReactAppListener = (message: ChromeMessage, sender: chrome.run
         };
         response(res)
     }
+    if (!isPossibleLink() && isValidDate && message.from === Sender.Content) {
+        const newButtons = document.createElement('a');
+        newButtons.title = "Anime365";
+        newButtons.text = "Anime365";
+        newButtons.className = "b-link_button";
+        newButtons.href = "https://smotret-anime.com/catalog/search?q=" + encodeURI(document.querySelector("meta[itemprop=headline]")!.getAttribute('content')!);
+        newButtons.target = "_blank";
+        document.getElementsByClassName('c-image').item(0)!.appendChild(newButtons);
+    }
+
 }
 
 const main = () => {

@@ -1,7 +1,7 @@
 {
   "name": "Shiki",
   "description": "Shikimori `watch online` extension",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "manifest_version": 3,
   "action": {
     "default_popup": "index.html",
@@ -13,6 +13,9 @@
       "js": ["./static/js/content.js"]
     }
   ],
+  "background": {
+    "service_worker": "./static/js/background.js"
+  },
   "permissions": [
     "activeTab",
     "webNavigation",
