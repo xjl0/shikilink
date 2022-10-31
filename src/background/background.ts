@@ -1,4 +1,5 @@
 import {ChromeMessage, Sender} from '../types';
+
 /** Fired when the extension is first installed,
  *  when the extension is updated to a new version,
  *  and when Chrome is updated to a new version. */
@@ -27,12 +28,36 @@ chrome.runtime.onSuspend.addListener(() => {
     console.log('[background.js] onSuspend')
 });
 
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    if (changeInfo.url) {
+let tabId: number;
+
+chrome.webRequest.onCompleted.addListener(function (details) {
+    const parsedUrl = new URL(details.url);
+    console.log(tabId);
+    console.log(parsedUrl.pathname);
+    if (tabId) {
         const msg: ChromeMessage = {
             from: Sender.Content,
-            message: changeInfo.url,
+            message: parsedUrl.pathname,
         }
+        console.log(msg);
         chrome.tabs.sendMessage(tabId, msg)
     }
+}, {
+    urls: ['*://shikimori.one/animes/*', '*://shikimori.org/animes/*']
 });
+
+chrome.webNavigation.onHistoryStateUpdated.addListener(
+    details => {
+        tabId = details.tabId;
+    },
+    {
+        url: [
+            {
+                hostSuffix: 'shikimori.one'
+            },
+            {
+                hostSuffix: 'shikimori.org'
+            }
+        ]
+    }
+);
