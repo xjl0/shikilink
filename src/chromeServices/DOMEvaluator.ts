@@ -11,7 +11,6 @@ const isPossibleLink = (): boolean => {
 }
 
 const messagesFromReactAppListener = (message: ChromeMessage, sender: chrome.runtime.MessageSender, response: MessageResponse) => {
-    console.log(message);
     if (isPossibleLink()) {
         const res: DOMMessageResponse = {
             title: "Не найдено аниме",
