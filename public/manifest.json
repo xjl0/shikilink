@@ -1,11 +1,11 @@
 {
-  "name": "Shiki",
-  "description": "Shikimori `watch online` extension",
-  "version": "1.0.1",
+  "name": "ShikiLink",
+  "description": "Adds an external link to the Shikimori website to watch the anime.",
+  "version": "1.0.0",
   "manifest_version": 3,
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Shiki watch online"
+    "default_title": "ShikiLink"
   },
   "content_scripts": [
     {
@@ -23,8 +23,9 @@
     "tabs"
   ],
   "icons": {
-    "16": "logo192.png",
-    "48": "logo192.png",
-    "128": "logo512.png"
+    "16": "/images/16.png",
+    "24": "/images/24.png",
+    "128": "/images/128.png",
+    "512": "/images/512.png"
   }
 }

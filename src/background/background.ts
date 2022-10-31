@@ -32,14 +32,11 @@ let tabId: number;
 
 chrome.webRequest.onCompleted.addListener(function (details) {
     const parsedUrl = new URL(details.url);
-    console.log(tabId);
-    console.log(parsedUrl.pathname);
     if (tabId) {
         const msg: ChromeMessage = {
             from: Sender.Content,
             message: parsedUrl.pathname,
         }
-        console.log(msg);
         chrome.tabs.sendMessage(tabId, msg)
     }
 }, {
