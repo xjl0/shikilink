@@ -30,21 +30,6 @@ const messagesFromReactAppListener = (message: ChromeMessage, sender: chrome.run
         };
         response(res)
     }
-    if (!isPossibleLink() && isValidDate && message.from === Sender.Content && document.getElementsByClassName('answer_is_forty_two').length === 0) {
-        const linkAnime = encodeURI(document.querySelector("meta[itemprop=headline]")!.getAttribute('content')!);
-        document.getElementsByClassName('c-image').item(0)!.appendChild(generateLink("Anime365", "https://smotret-anime.com/catalog/search?q=" + linkAnime));
-        document.getElementsByClassName('c-image').item(0)!.appendChild(generateLink("AnimeGo.org", "https://animego.org/search/anime?q=" + linkAnime));
-    }
-}
-
-const generateLink = (title: string, link: string): HTMLAnchorElement => {
-    const button = document.createElement('a');
-    button.target = "_blank";
-    button.className = "b-link_button answer_is_forty_two";
-    button.title = title;
-    button.text = title;
-    button.href = link;
-    return button
 }
 
 const main = () => {
@@ -54,3 +39,27 @@ const main = () => {
 if (window.location.host === "shikimori.one" || window.location.host === "shikimori.org") {
     main();
 }
+
+const generateLink = (title: string, link: string): HTMLAnchorElement => {
+    const button = document.createElement('a');
+    button.target = "_blank";
+    button.className = "b-link_button";
+    button.title = title;
+    button.text = title;
+    button.href = link;
+    button.rel = "nofollow noopener noreferrer";
+    return button
+}
+
+chrome.runtime.onMessage.addListener(function(request) {
+    if (request && request.type === 'page-rendered') {
+        if (!document.getElementById("answer_is_forty_two") && window.location.href.indexOf("/animes/") !== -1 && document.getElementsByClassName('c-image').length !== 0 && document.querySelector("meta[itemprop=headline]") !== null){
+            const linkAnime = encodeURI(document.querySelector("meta[itemprop=headline]")!.getAttribute('content')!);
+            const div = document.createElement('div');
+            div.id = "answer_is_forty_two";
+            document.getElementsByClassName('c-image').item(0)!.appendChild(div).appendChild(generateLink("Anime365", "https://smotret-anime.com/catalog/search?q=" + linkAnime));
+            document.getElementsByClassName('c-image').item(0)!.appendChild(div).appendChild(generateLink("AnimeGo.org", "https://animego.org/search/anime?q=" + linkAnime));
+        }
+    }
+});
+

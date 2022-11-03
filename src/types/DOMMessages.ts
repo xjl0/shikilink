@@ -11,7 +11,7 @@ export type DOMMessageResponse = {
 
 export enum Sender {
     React,
-    Content
+    Content,
 }
 
 export interface ChromeMessage {
