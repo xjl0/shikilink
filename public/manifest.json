@@ -9,7 +9,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://shikimori.one/*", "*://shikimori.org/*"],
+      "matches": ["*://shikimori.one/*", "*://shikimori.org/*", "*://smotret-anime.com/*"],
       "js": ["./static/js/content.js"]
     }
   ],
