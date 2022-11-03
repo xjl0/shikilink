@@ -11,7 +11,7 @@ const generateLink = (title: string, link: string): HTMLAnchorElement => {
     return button
 }
 
-if (!document.getElementById("answer_is_forty_two")){
+if (!document.getElementById("answer_is_forty_two") && window.location.href.indexOf("/animes/") !== -1){
     const linkAnime = encodeURI(document.querySelector("meta[itemprop=headline]")!.getAttribute('content')!);
     const div = document.createElement('div');
     div.id = "answer_is_forty_two";
