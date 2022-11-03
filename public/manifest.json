@@ -7,9 +7,12 @@
     "default_popup": "popup.html",
     "default_title": "ShikiLink"
   },
+  "host_permissions": [
+    "*://shikimori.one/*", "*://shikimori.org/*", "*://smotret-anime.com/*", "*://anime365.ru/*"
+  ],
   "content_scripts": [
     {
-      "matches": ["*://shikimori.one/*", "*://shikimori.org/*", "*://smotret-anime.com/*"],
+      "matches": ["*://shikimori.one/*", "*://shikimori.org/*", "*://smotret-anime.com/*", "*://anime365.ru/*"],
       "js": ["./static/js/content.js"]
     }
   ],
@@ -18,8 +21,8 @@
   },
   "permissions": [
     "activeTab",
-    "webRequest",
     "webNavigation",
+    "scripting",
     "tabs"
   ],
   "icons": {

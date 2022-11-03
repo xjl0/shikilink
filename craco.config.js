@@ -7,7 +7,8 @@ module.exports = {
                     main: [env === 'development' &&
                     require.resolve('react-dev-utils/webpackHotDevClient'),paths.appIndexJs].filter(Boolean),
                     content: './src/chromeServices/DOMEvaluator.ts',
-                    background: './src/background/background.ts'
+                    background: './src/background/background.ts',
+                    myAnimeLink: './src/injects/myAnimeLink.ts',
                 },
                 output: {
                     ...webpackConfig.output,
