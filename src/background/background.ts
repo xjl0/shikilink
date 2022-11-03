@@ -18,9 +18,9 @@ chrome.runtime.onSuspend.addListener(() => {
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     if (tab.active) {
-        chrome.scripting.executeScript({
-            target: {tabId: tabId},
-            files: ['./static/js/myAnimeLink.js'],
-        });
+        chrome.tabs.sendMessage(tabId, { type: 'page-rendered'});
+    }
+    if (tab.active && changeInfo.status === "complete") {
+        chrome.tabs.sendMessage(tabId, { type: 'page-rendered-anime365'});
     }
 })

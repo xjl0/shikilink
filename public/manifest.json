@@ -12,8 +12,12 @@
   ],
   "content_scripts": [
     {
-      "matches": ["*://shikimori.one/*", "*://shikimori.org/*", "*://smotret-anime.com/*", "*://anime365.ru/*"],
-      "js": ["./static/js/content.js"]
+      "matches": ["*://shikimori.one/*", "*://shikimori.org/*"],
+      "js": ["./static/js/shiki_content.js"]
+    },
+    {
+      "matches": ["*://smotret-anime.com/*", "*://anime365.ru/*"],
+      "js": ["./static/js/anime365_content.js"]
     }
   ],
   "background": {
