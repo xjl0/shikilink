@@ -1,18 +1,18 @@
 {
   "name": "ShikiLink",
   "description": "Adds an external link to the Shikimori website to watch the anime.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "manifest_version": 3,
   "action": {
     "default_popup": "popup.html",
     "default_title": "ShikiLink"
   },
   "host_permissions": [
-    "*://shikimori.one/*", "*://shikimori.org/*", "*://smotret-anime.com/*", "*://anime365.ru/*"
+    "*://shikimori.me/*", "*://shikimori.one/*", "*://shikimori.org/*", "*://smotret-anime.com/*", "*://anime365.ru/*"
   ],
   "content_scripts": [
     {
-      "matches": ["*://shikimori.one/*", "*://shikimori.org/*"],
+      "matches": ["*://shikimori.me/*", "*://shikimori.one/*", "*://shikimori.org/*"],
       "js": ["./static/js/shiki_content.js"]
     },
     {

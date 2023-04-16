@@ -36,7 +36,7 @@ const main = () => {
     chrome.runtime.onMessage.addListener(messagesFromReactAppListener);
 }
 
-if (window.location.host === "shikimori.one" || window.location.host === "shikimori.org") {
+if (window.location.host === "shikimori.me" || window.location.host === "shikimori.one" || window.location.host === "shikimori.org") {
     main();
 }
 
