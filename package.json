@@ -1,6 +1,6 @@
 {
   "name": "shikilink",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.0.0-alpha.7",
