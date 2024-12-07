@@ -17,6 +17,7 @@ jobs:
       - name: Install dependencies and Build
         run: |
           npm install
+          npx update-browserslist-db@latest
           NODE_ENV=production npm run build
       - name: PreDeploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
