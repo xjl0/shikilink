@@ -4,7 +4,7 @@
 Также добавляет возможность перейти к следующей серии автоматически.
 
 ## Установка в Chrome
-[Скачайте архив](https://github.com/xjl0/shikilink/releases/download/1.0.3/build.zip), распакуйте архив.
+[Скачайте архив](https://github.com/xjl0/shikilink/releases/download/1.0.4/shikilink-build.zip), распакуйте архив.
 Откройте в Chrome [управление расширениями](chrome://extensions/), включите режим разработчика, нажмите загрузить распакованное расширение и выберите папку build.
 
 ## Локальная сборка
