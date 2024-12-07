@@ -57,7 +57,8 @@ chrome.runtime.onMessage.addListener(function(request) {
             const linkAnime = encodeURI(document.querySelector("meta[itemprop=headline]")!.getAttribute('content')!);
             const div = document.createElement('div');
             div.id = "answer_is_forty_two";
-            document.getElementsByClassName('c-image').item(0)!.appendChild(div).appendChild(generateLink("Anime365", "https://smotret-anime.com/catalog/search?q=" + linkAnime));
+            document.getElementsByClassName('c-image').item(0)!.appendChild(div).appendChild(generateLink("anime365.ru", "https://anime365.ru/catalog/search?q=" + linkAnime));
+            document.getElementsByClassName('c-image').item(0)!.appendChild(div).appendChild(generateLink("anime365.ru", "https://anime-365.ru/catalog/search?q=" + linkAnime));
             document.getElementsByClassName('c-image').item(0)!.appendChild(div).appendChild(generateLink("AnimeGo.org", "https://animego.org/search/anime?q=" + linkAnime));
         }
     }
